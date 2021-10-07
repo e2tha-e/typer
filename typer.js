@@ -11,13 +11,13 @@ const center = {
 };
 
 const letter = {
-  font: '25px Monospace',
+  font: '25px Consolas, Monaco, "Andale Mono", "Ubuntu Mono", monospace',
   color: '#0095DD',
   width: 15,
   height: 20,
-  highestSpeed: 1.6,
+  highestSpeed: 1.0,
   lowestSpeed: 0.6,
-  probability: 0.02
+  probability: 0.005
 };
 
 let letters = [];

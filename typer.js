@@ -97,23 +97,45 @@ window.changeCase = function () {
 };
 
 function keyDownHandler (e) {
-  if (animation !== undefined && e.keyCode >= 65 && e.keyCode <= 90) {
+  let keyCode;
+  // Adjust top-row keyCodes if keyboard layout is right-handed Dvorak.
+  // For whatever reason, JS events register top-row keyCodes as number keys even if the layout says otherwise.
+  switch (e.keyCode) {
+    case 53:
+      keyCode = 74;
+      break;
+    case 54:
+      keyCode = 76;
+      break;
+    case 55:
+      keyCode = 77;
+      break;
+    case 56:
+      keyCode = 70;
+      break;
+    case 57:
+      keyCode = 80;
+      break;
+    default:
+      keyCode = e.keyCode;
+  }
+  if (animation !== undefined && keyCode >= 65 && keyCode <= 90) {
     for (let i = letters.length - 1; i >= 0; i--) {
       const l = letters[i];
       if (caseSensitive) {
         if (e.shiftKey) {
-          if (e.keyCode === l.code) {
+          if (keyCode === l.code) {
             type(i, l);
             return;
           }
         } else {
-          if (e.keyCode + 32 === l.code) {
+          if (keyCode + 32 === l.code) {
             type(i, l);
             return;
           }
         }
       } else {
-        if (e.keyCode === l.code || e.keyCode + 32 === l.code) {
+        if (keyCode === l.code || keyCode + 32 === l.code) {
           type(i, l);
           return;
         }

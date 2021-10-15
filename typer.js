@@ -1,7 +1,7 @@
 /* global canvas ctx animation:writable gameLoop label loop paintCircle isIntersectingRectangleWithCircle generateRandomNumber generateRandomCharCode paintParticles createParticles processParticles */
 let score = 0;
 let lives = 10;
-let caseSensitive = true;
+let caseSensitive = false;
 
 const center = {
   x: canvas.width / 2,

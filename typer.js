@@ -1,4 +1,4 @@
-/* global canvas ctx animation:writable gameLoop label loop paintCircle isIntersectingRectangleWithCircle generateRandomNumber generateRandomCharCode paintParticles createParticles processParticles */
+/* global canvas ctx animation:writable gameLoop label loop paintCircle isIntersectingRectangleWithCircle generateRandomNumber generateRandomCharCode paintParticles createParticles processParticles then */
 let score = 0;
 let lives = 10;
 let caseSensitive = false;
@@ -15,8 +15,7 @@ const letter = {
   color: '#0095DD',
   width: 15,
   height: 20,
-  highestSpeed: 1.0,
-  lowestSpeed: 0.6,
+  lowestSpeed: 0.1, // Low cap on the range 0.1 - 0.5. High range is 1.6 - 2.
   probability: 0.005
 };
 
@@ -29,6 +28,7 @@ document.addEventListener('keyup', keyUpHandler);
 window.addEventListener('resize', resizeHandler);
 
 loop(function (frames) {
+console.warn(then)
   paintCircle(center.x, center.y, center.radius, center.color);
   ctx.font = letter.font;
   ctx.fillStyle = letter.color;
@@ -52,7 +52,15 @@ function createLetters () {
     const dX = center.x - x;
     const dY = center.y - y;
     const norm = Math.sqrt(dX ** 2 + dY ** 2);
-    const speed = generateRandomNumber(letter.lowestSpeed, letter.highestSpeed);
+    let lowSpeed = letter.lowestSpeed;
+    if (then < 900000) { // 15 minutes
+      difficulty = Math.floor(then / (60 * 1000)) / 10;
+      lowSpeed += difficulty;
+    } else {
+      lowSpeed += 1.5;
+    }
+    const highSpeed = lowSpeed + 0.4;
+    const speed = generateRandomNumber(lowSpeed, highSpeed);
     letters.push({
       x,
       y,

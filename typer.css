@@ -12,3 +12,10 @@ canvas {
   left: 50%;
   transform: translateX(-50%);
 }
+
+@font-face {
+  font-family: "Roboto Mono";
+  font-style: normal;
+  font-weight: 400;
+  src: url("RobotoMono/RobotoMono-Regular.ttf") format("truetype");
+}

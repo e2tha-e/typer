@@ -11,7 +11,7 @@ const center = {
 };
 
 const letter = {
-  font: '25px Consolas, Monaco, "Andale Mono", "Ubuntu Mono", monospace',
+  font: '25px "Roboto Mono", monospace',
   color: '#0095DD',
   width: 15,
   height: 20,
@@ -28,7 +28,6 @@ document.addEventListener('keyup', keyUpHandler);
 window.addEventListener('resize', resizeHandler);
 
 loop(function (frames) {
-console.warn(then)
   paintCircle(center.x, center.y, center.radius, center.color);
   ctx.font = letter.font;
   ctx.fillStyle = letter.color;

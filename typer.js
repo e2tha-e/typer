@@ -45,7 +45,14 @@ loop(function (frames) {
 });
 
 function createLetters () {
-  if (Math.random() < letter.probability) {
+  let probability = letter.probability;
+  if (then < 1800000) { // 30 minutes
+    const difficulty = Math.floor(then / (120 * 1000)) / 1000;
+    probability += difficulty;
+  } else {
+    probability += 1.5;
+  }
+  if (Math.random() < probability) {
     const x = Math.random() < 0.5 ? 0 : canvas.width;
     const y = Math.random() * canvas.height;
     const dX = center.x - x;
@@ -53,7 +60,7 @@ function createLetters () {
     const norm = Math.sqrt(dX ** 2 + dY ** 2);
     let lowSpeed = letter.lowestSpeed;
     if (then < 900000) { // 15 minutes
-      difficulty = Math.floor(then / (60 * 1000)) / 10;
+      const difficulty = Math.floor(then / (60 * 1000)) / 10;
       lowSpeed += difficulty;
     } else {
       lowSpeed += 1.5;

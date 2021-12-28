@@ -1,4 +1,4 @@
-/* global canvas ctx animation:writable gameLoop label loop paintCircle isIntersectingRectangleWithCircle generateRandomNumber generateRandomCharCode paintParticles createParticles processParticles then */
+/* global canvas ctx animation gameLoop label loop paintCircle isIntersectingRectangleWithCircle generateRandomNumber generateRandomCharCode paintParticles createParticles processParticles resumed then */
 let score = 0;
 let lives = 10;
 let caseSensitive = false;
@@ -52,7 +52,6 @@ function createLetters () {
   } else {
     probability += 0.015;
   }
-console.log(probability)
   if (Math.random() < probability) {
     const x = Math.random() < 0.5 ? 0 : canvas.width;
     const y = Math.random() * canvas.height;
@@ -161,15 +160,17 @@ function keyDownHandler (e) {
 }
 
 function keyUpHandler (e) {
+  // Escape key pauses and resumes.
   if (e.keyCode === 27) {
     if (animation === undefined) {
+      resumed = performance.now();
       animation = window.requestAnimationFrame(gameLoop);
     } else {
       window.cancelAnimationFrame(animation);
       animation = undefined;
     }
   }
-}
+};
 
 function resizeHandler () {
   canvas.width = window.innerWidth;
